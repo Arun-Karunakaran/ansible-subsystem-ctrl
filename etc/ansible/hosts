@@ -1,10 +1,10 @@
 # inventory
 [win10hosts]
-usau-or11-cl ansible_host=10.5.71.115
-usau-or-dlw10 ansible_host=10.5.70.161
+yourhostname1 ansible_host=10.5.xx.yyy
+yourhostname2 ansible_host=10.5.xx.yyy
 [win10hosts:vars]
-ansible_user=ingres
-ansible_password=P@ssw0rdP@ssw0rd
+ansible_user=<win10hostusername?>
+ansible_password=<win10hostpassword?>
 ansible_port=5986
 ansible_connection=winrm
 ansible_winrm_transport=basic
