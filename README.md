@@ -6,3 +6,6 @@ Platforms supported currently:
 1. windows 10
 2. windows server 16
 3. windows server 19
+
+step1:
+1. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning /configuration management 
