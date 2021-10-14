@@ -23,37 +23,9 @@
     win_copy:
       src: /etc/ansible/roles/common/files/windows/license.xml
       dest: C:\license
-  - name: Copy run_4gl2js jenkins specific file
-    win_copy:
-      src: /etc/ansible/roles/common/files/windows/run_4gl2js.bat
-      dest: C:\scripts
-  - name: Create testsuite 4gl2js folder
-    win_file:
-      path: C:\Jenkins\test_or_js
-      state: directory
   - name: Create testsuite unittestframework folder
     win_file:
       path: C:\Jenkins\test_or
-      state: directory
-  - name: Create jsonrpc testsuite folder
-    win_file:
-      path: C:\Jenkins\jsonrpc_tests
-      state: directory
-  - name: Create webgen folder
-    win_file:
-      path: C:\Jenkins\or_webgen
-      state: directory
-  - name: Create webgen tests folder
-    win_file:
-      path: C:\Jenkins\or_webgen_tests
-      state: directory
-  - name: Create workspace folder for webgen
-    win_file:
-      path: C:\Jenkins\WebGen_Testing_Workspace
-      state: directory
-  - name: Create change_charset folder  
-    win_file:
-      path: C:\Jenkins\change_charset
       state: directory
   - name: Create Testcomplete folder
     win_file:
@@ -83,10 +55,6 @@
     win_copy:
       src: /etc/ansible/roles/common/files/windows/TC/
       dest: C:\Jenkins\TC14_testing_workspace
-  - name: Create installers binary check folder
-    win_file:
-      path: C:\Jenkins\installersbinary_check
-      state: directory
   - name: Create workspace directory for jenkins
     win_file:
       path: C:\Jenkins\workspace
