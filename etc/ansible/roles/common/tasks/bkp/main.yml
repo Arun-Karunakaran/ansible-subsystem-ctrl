@@ -1,0 +1,11 @@
+# /etc/ansible/roles/common/tasks/main.yml
+# This playbook executes subtasks
+- hosts: all
+  tasks:
+  - name: Include a task in play
+    include_tasks: "{{ item }}"
+    loop:
+      - install-java8.yml
+      - install-tomcat8.5.yml
+      - install-cygwin64.yml
+      - create_test-repo-structure.yml

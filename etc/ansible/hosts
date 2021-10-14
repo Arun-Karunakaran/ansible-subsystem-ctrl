@@ -1,0 +1,11 @@
+# inventory
+[win10hosts]
+usau-or11-cl ansible_host=10.5.71.115
+usau-or-dlw10 ansible_host=10.5.70.161
+[win10hosts:vars]
+ansible_user=ingres
+ansible_password=P@ssw0rdP@ssw0rd
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_transport=basic
+ansible_winrm_server_cert_validation=ignore

@@ -1,0 +1,29 @@
+# /etc/ansible/roles/common/vars/external_vars.yml
+# This file contaisn all extrnal vars used in tasks  vars/external_vars.yml
+- name: All external variables are stored below in items(key-value pair)format
+  winenvpath:
+    cygwin_path: "C:\\cygwin64\\bin"
+    JRE_HOME: "C:\\Program Files\\Java\\jre1.8.0_202"
+    java_path: "%JRE_HOME%\\bin"
+    tomcat_path: "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5"
+    python_path: "C:\\Python3"
+    git_path: "C:\\Program Files\\Git\\cmd"
+  winfilepath:
+    java_ipath: "/etc/ansible/roles/common/files/windows/jre-8u291-windows-x64.exe"
+  windloadpath:
+    java_dpath: "https://download.oracle.com/otn/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-8u202-windows-x64.exe"
+    tomcat_dpath: "https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.71/bin/apache-tomcat-8.5.71.exe"
+    python_dpath: "https://www.python.org/ftp/python/3.8.10/python-3.8.10.exe"
+    git_dpath: "https://github.com/git-for-windows/git/releases/download/v2.33.0.windows.2/Git-2.33.0.2-64-bit.exe"
+  winfilenm:
+    jre_flnm: "jre-8u291-windows-x64.exe"
+    python_flnm: "python-3.8.10.exe"
+    tomcat_flnm: "apache-tomcat-8.5.71.exe"
+    git_flnm: "Git-2.33.0.2-64-bit.exe"
+  unixenvpath:
+    javahome_path: "/usr/bin/test"
+  ingprenv:
+    II_TIMEZONE_NAME: India
+    II_DATE_FORMAT: US
+    II_CHARSET: UTF8
+    II_INSTALLATION: I1

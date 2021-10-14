@@ -1,0 +1,77 @@
+# /etc/ansible/roles/common/tasks/install-tomcat.yml
+# This file installs a tomcat version that is required on windows
+- name: "Install tomcat if not installed for windows"
+  hosts: all
+  gather_facts: false 
+
+  vars:
+    envpath: "{{ lookup('file', '/etc/ansible/roles/common/vars/external_vars.yml') | from_yaml }}"
+
+  tasks:
+  - name: Debug envpath
+    debug:
+      msg: "{{ item.value }}"
+    with_dict: "{{ envpath }}"
+
+  - name: Print only the envpath for tomcat 
+    debug:
+      msg: "{{ lookup('items', item.winenvpath.tomcat_path) }}"
+    with_items: "{{ envpath }}"
+
+  - name: Determine if tomcat is installed
+    win_command: java -cp "{{ item.winenvpath.tomcat_path }}\lib\catalina.jar" org.apache.catalina.util.ServerInfo
+    register: validateinstaller
+    with_items: "{{ envpath }}"
+    ignore_errors: true
+#    when: 'is not recognized' in validatecygcheck.stderr
+
+  - name: Print previous step result
+    debug:
+      var: validateinstaller
+      verbosity: 2
+
+  - name: States the tomcat installations
+    debug:
+      msg: "{{ validateinstaller.results.stdout }} is already installed"
+    when: validateinstaller.results.rc == 0
+
+  - name: Downloads the tomcat installer
+    win_get_url:
+      url: "{{ item.windloadpath.tomcat_dpath }}"
+      dest: 'C:\temp\{{ item.winfilenm.tomcat_flnm }}'
+    with_items: "{{ envpath }}"
+    when: validateinstaller.results.rc == 2
+
+  - name: Installs tomcat on remote windows
+    raw: 'C:\temp\{{ item.winfilenm.tomcat_flnm }} /S'
+    with_items: "{{ envpath }}"
+    become: true
+    become_method: runas
+    become_user: Administrator
+    when: validateinstaller.results.rc == 1
+
+  - include: /etc/ansible/roles/common/tasks/start-tomcat_service.yml
+
+  - name: Determine if apache tomcat bin is added to PATH
+    win_shell: |
+      $Env:Path
+    register: validatepath
+
+  - name: Print previous step result
+    debug:
+      var: validatepath
+      verbosity: 2
+
+  - name: Append new value to PATH
+    win_environment:
+      name: path
+      value: "{{ validatepath.stdout | regex_replace('[\r\n]*', '') + ';' + item.winenvpath.tomcat_path + '\bin' }}"
+      state: present
+      level: machine
+    with_items: "{{ envpath }}"
+    when: not 'Tomcat' in validatepath.stdout
+
+  - include: /etc/ansible/roles/common/handlers/rm_duplicate_winenvs.yml
+
+    #  - name: "Restart Windows"
+    #    win_reboot:

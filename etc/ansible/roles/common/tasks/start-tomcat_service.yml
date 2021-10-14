@@ -1,0 +1,7 @@
+- name: Start tomcat as a service
+  raw: net start tomcat8
+  register: command_result
+  become: true
+  become_method: runas
+  become_user: Administrator
+  failed_when: not (command_result.stderr in "The requested service has already been started" or command_result.stdout in "service was started successfully")

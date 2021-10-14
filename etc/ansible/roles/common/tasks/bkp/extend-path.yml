@@ -1,0 +1,9 @@
+# This script is used for extending the windows path environment variables
+tasks:
+ - name: Get current machine PATH.
+   raw: $ENV:PATH
+   register: path_out
+
+ - name: "Add {{ item }} to PATH."
+   raw: SETX /M PATH "$ENV:PATH;{{ item }}"
+   when: "not (path_out.stdout | urlencode | search('{{ item | urlencode }}'))"
