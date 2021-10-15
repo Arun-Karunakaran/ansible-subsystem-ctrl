@@ -12,6 +12,6 @@ Usage:
 2. Install python3-virtualenv
 3. Create a virtual envrionment
 4. Install ansible in the virtual environment
-5. clone this repo to your etc directory
+5. clone this repo to your etc/ansible directory
 6. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning /configure environments 
 7. You are ready to GO!!!
