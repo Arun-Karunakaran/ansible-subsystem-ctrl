@@ -95,37 +95,33 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >        May 13 03:31:48 oransicentos8 systemd[1]: Started OpenSSH server daemon.
 >        May 13 03:52:48 oransicentos8 sshd[6649]: Accepted password for <user> from 10.5.248.139 port 60719 ssh2
 >        May 13 03:52:48 oransicentos8 sshd[6649]: pam_unix(sshd:session): session opened for user <user> by (uid=0)
-
-create ssh-keygen,
-
-cd /etc/ansible
-$ ssh-keygen
-[<user>@oransicentos8 ansible]$ ssh-keygen
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/<user>/.ssh/id_rsa): 
-/home/<user>/.ssh/id_rsa already exists.
-Overwrite (y/n)? y
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
-Your identification has been saved in /home/<user>/.ssh/id_rsa.
-Your public key has been saved in /home/<user>/.ssh/id_rsa.pub.
-The key fingerprint is:
-SHA256:WZsirFvp+82Mcwaiz67j99KGOfw/UKAOP8ZsS3NTJF8 <user>@oransicentos8
-The key's randomart image is:
-+---[RSA 3072]----+
-| |
-| o . E |
-| . =.. |
-| ... o+o |
-| *o Soo |
-| .%o=. |
-| .*oX + |
-| o=O +=+ |
-| .+**O===. |
-+----[SHA256]-----+
-To copy the generated SSH key to the remote node run the below command,
-
-$ ssh-copy-id <user@unixhost_ipaddress>
+**Step 12**: create ssh-keygen
+>       [<user>@oransicentos8 ~]$ ssh-keygen
+>       [<user>@oransicentos8 ansible]$ ssh-keygen
+>       Generating public/private rsa key pair.
+>       Enter file in which to save the key (/home/<user>/.ssh/id_rsa): 
+>       /home/<user>/.ssh/id_rsa already exists.
+>       Overwrite (y/n)? y
+>       Enter passphrase (empty for no passphrase): 
+>       Enter same passphrase again: 
+>       Your identification has been saved in /home/<user>/.ssh/id_rsa.
+>       Your public key has been saved in /home/<user>/.ssh/id_rsa.pub.
+>       The key fingerprint is:
+>       SHA256:WZsirFvp+82Mcwaiz67j99KGOfw/UKAOP8ZsS3NTJF8 <user>@oransicentos8
+>       The key's randomart image is:
+>       +---[RSA 3072]----+
+>       | |
+>       | o . E |
+>       | . =.. |
+>       | ... o+o |
+>       | *o Soo |
+>       | .%o=. |
+>       | .*oX + |
+>       | o=O +=+ |
+>       | .+**O===. |
+>       +----[SHA256]-----+
+**Step 13**: To copy the generated SSH key to the remote node run the below command
+>       [<user>@oransicentos8 ~]$ ssh-copy-id <user@unixhost_ipaddress>
 Check whether your ping to the local machine is working fine without any issues as below,
 
 (env-autospinup) [<user>@oransicentos8 ~]$ ansible localhost -m ping
