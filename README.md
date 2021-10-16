@@ -63,38 +63,38 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >        ● sshd.service - OpenSSH server daemon
 >           Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset>
 >           Active: active (running) since Wed 2020-05-13 03:31:48 EDT; 21min ago
-     Docs: man:sshd(8)
-           man:sshd_config(5)
- Main PID: 5901 (sshd)
-    Tasks: 1 (limit: 26213)
-   Memory: 3.4M
-   CGroup: /system.slice/sshd.service
-           └─5901 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,chacha20-p>
-
-May 13 03:31:48 oransicentos8 systemd[1]: Starting OpenSSH server daemon...
-May 13 03:31:48 oransicentos8 sshd[5901]: Server listening on 0.0.0.0 port 22.
-May 13 03:31:48 oransicentos8 sshd[5901]: Server listening on :: port 22.
-May 13 03:31:48 oransicentos8 systemd[1]: Started OpenSSH server daemon.
-May 13 03:52:48 oransicentos8 sshd[6649]: Accepted password for <user> from 1>
-May 13 03:52:48 oransicentos8 sshd[6649]: pam_unix(sshd:session): session opene>
-lines 1-17/17 (END)
-● sshd.service - OpenSSH server daemon
-   Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
-   Active: active (running) since Wed 2020-05-13 03:31:48 EDT; 21min ago
-     Docs: man:sshd(8)
-           man:sshd_config(5)
- Main PID: 5901 (sshd)
-    Tasks: 1 (limit: 26213)
-   Memory: 3.4M
-   CGroup: /system.slice/sshd.service
-           └─5901 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr,aes256-cbc,aes128-gcm@openssh.com,aes128-ctr,aes1>
-
-May 13 03:31:48 oransicentos8 systemd[1]: Starting OpenSSH server daemon...
-May 13 03:31:48 oransicentos8 sshd[5901]: Server listening on 0.0.0.0 port 22.
-May 13 03:31:48 oransicentos8 sshd[5901]: Server listening on :: port 22.
-May 13 03:31:48 oransicentos8 systemd[1]: Started OpenSSH server daemon.
-May 13 03:52:48 oransicentos8 sshd[6649]: Accepted password for <user> from 10.5.248.139 port 60719 ssh2
-May 13 03:52:48 oransicentos8 sshd[6649]: pam_unix(sshd:session): session opened for user <user> by (uid=0)
+>             Docs: man:sshd(8)
+>                   man:sshd_config(5)
+>         Main PID: 5901 (sshd)
+>          >          Tasks: 1 (limit: 26213)
+>           Memory: 3.4M
+>           CGroup: /system.slice/sshd.service
+>                   └─5901 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,chacha20-p>
+>        
+>        May 13 03:31:48 oransicentos8 systemd[1]: Starting OpenSSH server daemon...
+>        May 13 03:31:48 oransicentos8 sshd[5901]: Server listening on 0.0.0.0 port 22.
+>        May 13 03:31:48 oransicentos8 sshd[5901]: Server listening on :: port 22.
+>        May 13 03:31:48 oransicentos8 systemd[1]: Started OpenSSH server daemon.
+>        May 13 03:52:48 oransicentos8 sshd[6649]: Accepted password for <user> from 1>
+>        May 13 03:52:48 oransicentos8 sshd[6649]: pam_unix(sshd:session): session opene>
+>        lines 1-17/17 (END)
+>        ● sshd.service - OpenSSH server daemon
+>           Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
+>           Active: active (running) since Wed 2020-05-13 03:31:48 EDT; 21min ago
+>             Docs: man:sshd(8)
+>                   man:sshd_config(5)
+>         Main PID: 5901 (sshd)
+>            Tasks: 1 (limit: 26213)
+>           Memory: 3.4M
+>           CGroup: /system.slice/sshd.service
+>                   └─5901 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr,aes256-cbc,aes128-gcm@openssh.com,aes128-ctr,aes1>
+>        
+>        May 13 03:31:48 oransicentos8 systemd[1]: Starting OpenSSH server daemon...
+>        May 13 03:31:48 oransicentos8 sshd[5901]: Server listening on 0.0.0.0 port 22.
+>        May 13 03:31:48 oransicentos8 sshd[5901]: Server listening on :: port 22.
+>        May 13 03:31:48 oransicentos8 systemd[1]: Started OpenSSH server daemon.
+>        May 13 03:52:48 oransicentos8 sshd[6649]: Accepted password for <user> from 10.5.248.139 port 60719 ssh2
+>        May 13 03:52:48 oransicentos8 sshd[6649]: pam_unix(sshd:session): session opened for user <user> by (uid=0)
 
 create ssh-keygen,
 
