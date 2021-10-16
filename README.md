@@ -23,10 +23,10 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       virtualenv env-autospinup
 
 **Step 3**: List the directories
->        [user@oransicentos8 ~]# ls
+>        [<user>@oransicentos8 ~]# ls
 >        env-autospinup  env  initial-setup-ks.cfg
 **Step 4**: Activate the virtual environment
->        [user@oransicentos8 ~]# source env-autospinup/bin/activate
+>        [<user>@oransicentos8 ~]# source env-autospinup/bin/activate
 **Step 5**: Verify the python version in the virtual environment
 >        (env-autospinup) [<user>@oransicentos8 ~]$ python --version
 >        Python 3.6.8
@@ -44,7 +44,7 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >        (env-autospinup) [<user>@oransicentos8 ~]$ ansible-config view
 **Step 9**: Now Clone this repo to /etc/ansible directory
 **Step 10**: Run the command to check Ansible setup is complete,
->        (env-autospinup) [<user>@oransicentos8 ~]$ sudo systemctl status sshd
+>        [<user>@oransicentos8 ~]$ sudo systemctl status sshd
 **Step 11**: And check whether the sshd connection is Active and in running state and check whether the session is opened with permissions enabled for user root . If permission are not enabled and fails for root user with below error,
 >        May 12 20:15:17 oransicentos8 sshd[31140]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.5.20.99 user=root
 >        May 12 20:15:17 oransicentos8 sshd[31140]: pam_succeed_if(sshd:auth): requirement "uid >= 1000" not met by user "root"
@@ -56,17 +56,13 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >        May 12 20:15:35 oransicentos8 sshd[31143]: Connection closed by authenticating user root 10.5.20.99 port 29139 [preauth]
 >        May 13 03:31:27 oransicentos8 systemd[1]: Stopping OpenSSH server daemon...
 >        May 13 03:31:27 oransicentos8 systemd[1]: Stopped OpenSSH server daemon.
-**Step 12**: Restart the systemctl sshd service,
-
-[<user>@oransicentos8 ~]$ sudo systemctl start sshd
-[<user>@oransicentos8 ~]$ sudo systemctl enable sshd
-And Wait a while and make sure the pam_unix(sshd:session): session opened for user
-
-(env-autospinup) [<user>@oransicentos8 ~]$ sudo systemctl status sshd
-[sudo] password for <user>:
-● sshd.service - OpenSSH server daemon
-   Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset>
-   Active: active (running) since Wed 2020-05-13 03:31:48 EDT; 21min ago
+**Step 12**: Restart the systemctl sshd service, and Wait a while and make sure the pam_unix(sshd:session): session opened for user
+>       [<user>@oransicentos8 ~]$ sudo systemctl start sshd
+>       [<user>@oransicentos8 ~]$ sudo systemctl enable sshd
+>       [<user>@oransicentos8 ~]$ sudo systemctl status sshd
+>        ● sshd.service - OpenSSH server daemon
+>           Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset>
+>           Active: active (running) since Wed 2020-05-13 03:31:48 EDT; 21min ago
      Docs: man:sshd(8)
            man:sshd_config(5)
  Main PID: 5901 (sshd)
