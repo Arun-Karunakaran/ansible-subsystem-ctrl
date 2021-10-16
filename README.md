@@ -14,73 +14,49 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 3. You are ready to GO!!!
 
 **Detailed Instructions:**<br />
-Step 1: Verify that Python3 is installed on Ansible control node
-# sudo dnf install python3
-# sudo alternatives --set python /usr/bin/python3
-Step 2: Create a virtual environment to begin with.
-# sudo dnf install python3-virtualenv
-# virtualenv env-autospinup
-Using base prefix '/usr'
-New python executable in /root/env-autospinup/bin/python3.6
-Also creating executable in /root/ansiblecicd/bin/python
-Installing setuptools, pip, wheel...done.
-[<user>@oransicentos8 ~]# ls
-anaconda-ks.cfg  env-autospinup  env  initial-setup-ks.cfg 
+**Step 1**: Verify that Python3 is installed on Ansible control node
+>       sudo dnf install python3
+>       sudo alternatives --set python /usr/bin/python3
 
-[<user>@oransicentos8 ~]# source env-autospinup/bin/activate
+**Step 2**: Create a virtual environment to begin with.
+>       sudo dnf install python3-virtualenv
+>       virtualenv env-autospinup
 
-(env-autospinup) [<user>@oransicentos8 ~]$ python --version
-Python 3.6.8
-
-(env-autospinup) [<user>@oransicentos8 ~]# pip install ansible
-Collecting ansible
-  Downloading ansible-2.9.7.tar.gz (14.2 MB)
-     |████████████████████████████████| 14.2 MB 5.1 MB/s 
-Collecting jinja2
-  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
-     |████████████████████████████████| 125 kB 78.1 MB/s 
-Collecting PyYAML
-  Downloading PyYAML-5.3.1.tar.gz (269 kB)
-     |████████████████████████████████| 269 kB 61.0 MB/s 
-Collecting cryptography
-  Downloading cryptography-2.9.2-cp35-abi3-manylinux2010_x86_64.whl (2.7 MB)
-     |██████████████████████████████▌ | 2.6 MB 76.6 MB/s eta 0:00:01
-Check the ansible version after install and make sure the config file path is mapped.
-
-(env-autospinup) [akarunak@oransicentos8 ~]$ ansible --version
-ansible 2.9.7
-config file = /etc/ansible/ansible.cfg
-configured module search path = ['/home/<user>/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-ansible python module location = /home/<user>/env-autospinup/lib/python3.6/site-packages/ansible
-executable location = /home/<user>/env-autospinup/bin/ansible
-python version = 3.6.8 (default, Nov 21 2019, 19:31:34) [GCC 8.3.1 20190507 (Red Hat 8.3.1-4)]
-
-If in case config file = None, then follow the below steps to set up the ansible.cfg and hosts. host file is required to configure the host servers that you would like to establish connections with.
-
-run the command,
-
-$ ansible-config view
-
-Clone this repo to /etc/ansible directory
-
-Run the command to check Ansible setup is complete,
-
-sudo systemctl status sshd
-And check whether the sshd connection is Active and in running state and check whether the session is opened with permissions enabled for user root .
-
-If permission are not enabled and fails for root user with below error,
-
-May 12 20:15:17 oransicentos8 sshd[31140]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.5.20.99 user=root
-May 12 20:15:17 oransicentos8 sshd[31140]: pam_succeed_if(sshd:auth): requirement "uid >= 1000" not met by user "root"
-May 12 20:15:19 oransicentos8 sshd[31140]: Failed password for root from 10.5.20.99 port 29101 ssh2
-May 12 20:15:19 oransicentos8 sshd[31140]: Connection closed by authenticating user root 10.5.20.99 port 29101 [preauth]
-May 12 20:15:31 oransicentos8 sshd[31143]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.5.20.99 user=root
-May 12 20:15:31 oransicentos8 sshd[31143]: pam_succeed_if(sshd:auth): requirement "uid >= 1000" not met by user "root"
-May 12 20:15:33 oransicentos8 sshd[31143]: Failed password for root from 10.5.20.99 port 29139 ssh2
-May 12 20:15:35 oransicentos8 sshd[31143]: Connection closed by authenticating user root 10.5.20.99 port 29139 [preauth]
-May 13 03:31:27 oransicentos8 systemd[1]: Stopping OpenSSH server daemon...
-May 13 03:31:27 oransicentos8 systemd[1]: Stopped OpenSSH server daemon.
-Restart the systemctl sshd service,
+**Step 3**: List the directories
+>        [user@oransicentos8 ~]# ls
+>        env-autospinup  env  initial-setup-ks.cfg
+**Step 4**: Activate the virtual environment
+>        [user@oransicentos8 ~]# source env-autospinup/bin/activate
+**Step 5**: Verify the python version in the virtual environment
+>        (env-autospinup) [<user>@oransicentos8 ~]$ python --version
+>        Python 3.6.8
+**Step 6**: Install Ansible in the virtual envrionment
+>        (env-autospinup) [<user>@oransicentos8 ~]# pip install ansible
+**Step 7**: Verify ansible version (make sure minimum version it atleast 2.9
+>        (env-autospinup) [<user>@oransicentos8 ~]$ ansible --version
+>        ansible 2.9.7
+>        config file = /etc/ansible/ansible.cfg
+>        configured module search path = ['/home/<user>/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+>        ansible python module location = /home/<user>/env-autospinup/lib/python3.6/site-packages/ansible
+>        executable location = /home/<user>/env-autospinup/bin/ansible
+>        python version = 3.6.8 (default, Nov 21 2019, 19:31:34) [GCC 8.3.1 20190507 (Red Hat 8.3.1-4)]
+**Step 8**: If in case config file = None, then follow the below steps to set up the ansible.cfg and hosts. host file is required to configure the host servers that you would like to establish connections with. Hence run the below command,
+>        (env-autospinup) [<user>@oransicentos8 ~]$ ansible-config view
+**Step 9**: Now Clone this repo to /etc/ansible directory
+**Step 10**: Run the command to check Ansible setup is complete,
+>        (env-autospinup) [<user>@oransicentos8 ~]$ sudo systemctl status sshd
+**Step 11**: And check whether the sshd connection is Active and in running state and check whether the session is opened with permissions enabled for user root . If permission are not enabled and fails for root user with below error,
+>        May 12 20:15:17 oransicentos8 sshd[31140]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.5.20.99 user=root
+>        May 12 20:15:17 oransicentos8 sshd[31140]: pam_succeed_if(sshd:auth): requirement "uid >= 1000" not met by user "root"
+>        May 12 20:15:19 oransicentos8 sshd[31140]: Failed password for root from 10.5.20.99 port 29101 ssh2
+>        May 12 20:15:19 oransicentos8 sshd[31140]: Connection closed by authenticating user root 10.5.20.99 port 29101 [preauth]
+>        May 12 20:15:31 oransicentos8 sshd[31143]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.5.20.99 user=root
+>        May 12 20:15:31 oransicentos8 sshd[31143]: pam_succeed_if(sshd:auth): requirement "uid >= 1000" not met by user "root"
+>        May 12 20:15:33 oransicentos8 sshd[31143]: Failed password for root from 10.5.20.99 port 29139 ssh2
+>        May 12 20:15:35 oransicentos8 sshd[31143]: Connection closed by authenticating user root 10.5.20.99 port 29139 [preauth]
+>        May 13 03:31:27 oransicentos8 systemd[1]: Stopping OpenSSH server daemon...
+>        May 13 03:31:27 oransicentos8 systemd[1]: Stopped OpenSSH server daemon.
+**Step 12**: Restart the systemctl sshd service,
 
 [<user>@oransicentos8 ~]$ sudo systemctl start sshd
 [<user>@oransicentos8 ~]$ sudo systemctl enable sshd
