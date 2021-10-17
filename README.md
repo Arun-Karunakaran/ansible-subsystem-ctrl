@@ -8,11 +8,15 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 3. windows server 19
 
 **Usage:**<br />
-1. Install packages: python 3.6.8, python3-virtualenv, Create a virtual envrionment and install ansible in the virtual environment (follow **detailed instructions** mentioned below to complete the ansible setup in your controller)
+1. **Install packages**: python 3.6.8, python3-virtualenv, Create a virtual envrionment and install ansible in the virtual environment (follow **Detailed Instructions** mentioned below to complete the ansible setup in your ansible server controller)
 2. clone this repo to your etc/ansible directory
-3. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning /configure environments 
-3. You are ready to GO!!!
-
+3. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning and configure environments 
+3. With all the above set you are now ready to GO!! with using ansible playbooks.
+4. *Sample ansible playbook commands*:
+    i) > *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml --syntax-check*  (to perform syntax check)
+   ii) > *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml* (to do a lint check)
+  iii) > *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml -l <speicfyhostnamehere> -vvvv* (to run playbook files)<br />
+  
 **Detailed Instructions:**<br />
 **Step 1**: Verify that Python3 is installed on Ansible control node
 >       sudo dnf install python3
@@ -173,15 +177,17 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pyOpenSSL --upgrade
 **Step 19**: Install pywinrm with support for basic, certificate, and NTLM auth, simply
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
-**Step 20 Configuring Windows Host**: For configuring our Windows 10 remote host system to connect with the Ansible Control node. We are going to install the WinRM listener- short for Windows Remote – which will allow the connection between the Windows host system and the Ansible server. Before we do so, the Windows host system needs to fulfill a few requirements for the installation to succeed,
+**Step 20**: Configuring Windows Host 
+  For configuring our Windows 10 remote host system to connect with the Ansible Control node. We are going to install the WinRM listener- short for Windows Remote – which will allow the connection between the Windows host system and the Ansible server. Before we do so, the Windows host system needs to fulfill a few requirements for the installation to succeed,
 1.  Your Windows host system should be Windows 7 or later. For Servers, ensure that you are using Windows Server 2008 and later versions.
 2.  Ensure your system is running .NET Framework 4.0 and later.
 3.  Windows PowerShell should be Version 3.0 & later
 4.  With all the requirements met, now follow the steps stipulated below:
 5.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Install-WMF3Hotfix.ps1 and run it on an elevated powershell window. 
 6.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Upgrade-PowerShell.ps1 and the script on an elevated powershell window.
-7.  Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated.\
-<br />**Step 21**: Checking for successfull connections<br />
+7.  Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated.<br />
+
+**Step 21**: Checking for successfull connections:<br />
 1. Navigate to /etc/ansible directory on your ansible server. And update the hosts file, a sample hostfile is already provided as part of this clone, update it as per your requirement.
 >       [winhost] 
 >       <serverip1> 
@@ -191,7 +197,7 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       ansible_password=<password> 
 >       ansible_connection=winrm 
 >       ansible_winrm_server_cert_validation=ignore
-2.  Run the below command to verify whether you are able to ping to hostservers from ansible,
+2. Run the below command to verify whether you are able to ping to hostservers from ansible,
 >       (env-autospinup) [<user>@oransicentos8 bin]$ ansible winhost -m win_ping
 >       <host_ip1> | SUCCESS => {
 >       "changed": false,
@@ -201,7 +207,9 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       "changed": false,
 >       "ping": "pong"
 >       }
-**Note**: ‘win_ping’ is used here for windows host connections, if it is unix host machine that we are trying to ping, then we are suppose to use ‘ping’ instead of win_ping.
+  
+  **Note**: ‘win_ping’ is used here for windows host connections, if it is unix host machine that we are trying to ping, then we are suppose to use ‘ping’ instead of win_ping.<br />
+  
 **Step 22**: Based on title specified in the hosts file you can ping both windows hosts and unix hosts continuously,
 >       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts linuxhost -m ping
 >       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts winhost -m win_ping
@@ -209,7 +217,7 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts winhost -m win_command -a "cmd /c dir C:\\"
 >       <host_ip1> | CHANGED | rc=0 >>
 >       Volume in drive C has no label.
->       Volume Serial Number is 2A92-F6EB
+>        Volume Serial Number is 2A92-F6EB
 >       Directory of C:\
 >       
 >       05/08/2020 02:08 AM <DIR> cygwin64
