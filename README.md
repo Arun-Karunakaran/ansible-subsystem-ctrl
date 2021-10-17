@@ -1,6 +1,6 @@
 # Ansible controller setup guide:
 
-This demos the setup of ansible server on a linux RHEL environment which can be used for automating the software provisioning or configure environments with prerequisite setup of softwares on a test/build environments. This sample code demos how to configure the system environment variables, modify the registries and install the prerequisite softwares conveniently on a remote windows platform in a quick timespan. This code can be extended to have support for other platforms as well.
+This demos the setup of ansible server on a linux RHEL environment which can be used for automating the software provisioning or configure environments with prerequisite setup of softwares on a test/build environments. This sample code demos how to configure the system environment variables, modify the registries, adding and modifying a service and installation of the prerequisite softwares conveniently on a remote windows platform in a quick timespan. This code can be extended to have support for other platforms as well.
 
 **Current sample code is supported on below platforms:**<br />
 1. **On windows 10**  *It serves in Installing pkgs: cygwin, jre, git, python, tomcat, tomcat-service, basic-test-repo-structure*
