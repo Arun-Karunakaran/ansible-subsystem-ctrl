@@ -2,23 +2,26 @@
 
 This demos the setup of ansible server on a linux RHEL environment which can be used for automating the software provisioning or configure environments with prerequisite setup of softwares on a test/build environments. This sample code demos how to configure the system environment variables, modify the registries and install the prerequisite softwares conveniently on a remote windows platform in a quick timespan. This code can be extended to have support for other platforms as well.
 
-**Current sample code supports for below platforms:**<br />
-1. windows 10
-2. windows server 16
-3. windows server 19
+**Current sample code is supported on below platforms:**<br />
+1. **On windows 10**  *It serves in Installing pkgs: cygwin, jre, git, python, tomcat, tomcat-service, basic-test-repo-structure*
+2. **On windows server 16**  *It serves in Installing pkgs: cygwin, jre, git, python, tomcat, tomcat-service, basic-test-repo-structure*
+3. **On windows server 19**  *It serves in Installing pkgs: cygwin, jre, git, python, tomcat, tomcat-service, basic-test-repo-structure*<br />
 
 **Usage:**<br />
-1. **Install packages**: python 3.6.8, python3-virtualenv, Create a virtual envrionment and install ansible in the virtual environment (*follow Detailed Instructions mentioned below to complete the ansible setup in your ansible server controller*)
-2. clone this repo to your etc/ansible directory
-3. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning and configure environments 
-4. Having all the above steps set you are now ready to GO!! with using ansible playbooks.<br />
+1. **Install packages**: 
+>-     python 3.6.8
+>-     python3-virtualenv
+2. Create a virtual envrionment and install ansible in the virtual environment-> *follow Detailed Instructions mentioned below to complete the ansible setup in your ansible server controller*
+3. Then clone this repo to your etc/ansible directory
+4. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning and configure environments 
+5. Having all the above steps set you are now ready to GO!! with using ansible playbooks.<br />
 
 *Sample ansible playbook commands* :<br />
->    **To perform syntax check:**      *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml --syntax-check*<br />
->    **To do a lint check:**           *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml*<br />
->    **To run playbook files**       *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml -l <speicfyhostnamehere> -vvvv*<br />
+>    **To perform syntax check:**      *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/sampleplaybook1.yml --syntax-check*<br />
+>    **To do a lint check:**           *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/sampleplaybook1.yml*<br />
+>    **To run playbook files**       *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/sampleplaybook1.yml -l <speicfyhostnamehere> -vvvv*<br />
   
-**Detailed Instructions**:<br />
+**Detailed Instructions:**<br />
 
 **Step 1**: Verify that Python3 is installed on Ansible control node
 >       sudo dnf install python3
