@@ -130,7 +130,7 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       }
 **Step 15**: Recheck on inventory host values specified by the user for remote server configurations,
 >       (env-autospinup) [<user>@oransicentos8 ~]$ ansible-inventory --list
-**Step 16**: This should return the below JSON format if hosts are specified,
+** This should return the below JSON format if hosts are specified **
 >       {
 >       "_meta": {
 >       "hostvars": {
