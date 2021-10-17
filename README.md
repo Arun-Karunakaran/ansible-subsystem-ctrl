@@ -121,92 +121,79 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       | .+**O===. |
 >       +----[SHA256]-----+
 **Step 13**: To copy the generated SSH key to the remote node run the below command
->       [<user>@oransicentos8 ~]$ ssh-copy-id <user@unixhost_ipaddress>
-Check whether your ping to the local machine is working fine without any issues as below,
-
-(env-autospinup) [<user>@oransicentos8 ~]$ ansible localhost -m ping
-localhost | SUCCESS => {
-"changed": false,
-"ping": "pong"
-}
-Recheck on inventory host values specified by the user for remote server configurations,
-
- ansible-inventory --list
-Should return the below JSON format if hosts are specified,
-{
-"_meta": {
-"hostvars": {
-"<host_ip1>": {
-"ansible_password": "<password>",
-"ansible_user": "<username>",
-},
-"<host_ip2>": {
-"ansible_password": "<password>",
-"ansible_user": "<username>",
-}
-}
-},
-"all": {
-"children": [
-"ungrouped",
-"linuxhost"
-]
-},
-"linuxhost": {
-"hosts": [
-"<host_ip1>",
-"<host_ip2>"
-]
-}
-}
-Now use ansible to ping the remote hosts and check whether connection is established between the ansible server and remote windows host machine,
-
-(env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts -m ping all
-<host_ip1> | SUCCESS => {
-"changed": false,
-"ping": "pong"
-}
-<host_ip2> | SUCCESS => {
-"changed": false,
-"ping": "pong"
-}
-  
-Step 2: Configuring Setup for managing Windows hosts using ansible
-Part1: Configure Control Machine
-$ pip install pyOpenSSL --upgrade
-Install pywinrm with support for basic, certificate, and NTLM auth, simply
-
-$ pip install pywinrm
-(env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
-Part2: Configuring Windows Host
+>       [<user>@oransicentos8 ~]$ ssh-copy-id <user@widowshost_ipaddress>
+**Step 14**: Check whether your ping to the local machine is working fine without any issues as below,
+>       (env-autospinup) [<user>@oransicentos8 ~]$ ansible localhost -m ping
+>       localhost | SUCCESS => {
+>       "changed": false,
+>       "ping": "pong"
+>       }
+**Step 15**: Recheck on inventory host values specified by the user for remote server configurations,
+>       (env-autospinup) [<user>@oransicentos8 ~]$ ansible-inventory --list
+**Step 16**: This should return the below JSON format if hosts are specified,
+>       {
+>       "_meta": {
+>       "hostvars": {
+>       "<host_ip1>": {
+>       "ansible_password": "<password>",
+>       "ansible_user": "<username>",
+>       },
+>       "<host_ip2>": {
+>       "ansible_password": "<password>",
+>       "ansible_user": "<username>",
+>       }
+>       }
+>       },
+>       "all": {
+>       "children": [
+>       "ungrouped",
+>       "linuxhost"
+>       ]
+>       },
+>       "linuxhost": {
+>       "hosts": [
+>       "<host_ip1>",
+>       "<host_ip2>"
+>       ]
+>       }
+>       }
+**Step 17**: Now use ansible to ping the remote hosts and check whether connection is established between the ansible server and remote windows host machine,
+>       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts -m ping all
+>       <host_ip1> | SUCCESS => {
+>       "changed": false,
+>       "ping": "pong"
+>       }
+>       <host_ip2> | SUCCESS => {
+>       "changed": false,
+>       "ping": "pong"
+>       }  
+**Step 18**: Configure Setup for managing Windows hosts using ansible
+**Part1: Configure Control Machine**
+>       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pyOpenSSL --upgrade
+**Install pywinrm with support for basic, certificate, and NTLM auth, simply**
+>       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
+>       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
+**Part2: Configuring Windows Host**
 For configuring our Windows 10 remote host system to connect with the Ansible Control node. We are going to install the WinRM listener- short for Windows Remote – which will allow the connection between the Windows host system and the Ansible server.
-
 Before we do so, the Windows host system needs to fulfill a few requirements for the installation to succeed:
-
-Your Windows host system should be Windows 7 or later. For Servers, ensure that you are using Windows Server 2008 and later versions.
-Ensure your system is running .NET Framework 4.0 and later.
-Windows PowerShell should be Version 3.0 & later
-With all the requirements met, now follow the steps stipulated below:
-
-Download the ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator
-
-.\ConfigureRemotingForAnsible.ps1
-Make sure a self signed SSL certificate is generated.
-  
-Part3:  Check for connection
-And perform the below steps,
-
-cd /etc/ansible/
-update hosts file,
-
-[winhost] 
-<serverip1> 
-<serverip2>
-[winhost:vars] 
-ansible_user=<username> 
-ansible_password=<password> 
-ansible_connection=winrm 
-ansible_winrm_server_cert_validation=ignore
+>-  Your Windows host system should be Windows 7 or later. For Servers, ensure that you are using Windows Server 2008 and later versions.
+>-  Ensure your system is running .NET Framework 4.0 and later.
+>-  Windows PowerShell should be Version 3.0 & later
+>-  With all the requirements met, now follow the steps stipulated below:
+>-  Download the ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator
+>          .\ConfigureRemotingForAnsible.ps1
+>          Make sure a self signed SSL certificate is generated.
+**Part3:  Check for connection. And perform the below steps**
+>-  cd /etc/ansible/
+>-  update hosts file,
+>  [winhost] 
+>  <serverip1> 
+>  <serverip2>
+>  [winhost:vars] 
+>  ansible_user=<username> 
+>  ansible_password=<password> 
+>  ansible_connection=winrm 
+>  ansible_winrm_server_cert_validation=ignore
 Run the below command to verify whether you are able to ping to hostservers from ansible,
 
 $ ansible winhost -m win_ping
