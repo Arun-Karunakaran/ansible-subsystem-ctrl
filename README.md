@@ -18,16 +18,14 @@ This demos the setup of ansible server on a linux RHEL environment which can be 
 >    **To do a lint check:**           *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml*<br />
 >    **To run playbook files**       *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml -l <speicfyhostnamehere> -vvvv*<br />
   
-**Detailed Instructions:**<br />
+**Detailed Instructions**:<br />
 
 **Step 1**: Verify that Python3 is installed on Ansible control node
 >       sudo dnf install python3
 >       sudo alternatives --set python /usr/bin/python3
-
 **Step 2**: Create a virtual environment to begin with.
 >       sudo dnf install python3-virtualenv
 >       virtualenv env-autospinup
-
 **Step 3**: List the directories
 >        [<user>@oransicentos8 ~]# ls
 >        env-autospinup  env  initial-setup-ks.cfg
