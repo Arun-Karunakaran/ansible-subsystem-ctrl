@@ -40,9 +40,9 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >        ansible python module location = /home/<user>/env-autospinup/lib/python3.6/site-packages/ansible
 >        executable location = /home/<user>/env-autospinup/bin/ansible
 >        python version = 3.6.8 (default, Nov 21 2019, 19:31:34) [GCC 8.3.1 20190507 (Red Hat 8.3.1-4)]
-**Step 8**: If in case config file = None, then follow the below steps to set up the ansible.cfg and hosts. host file is required to configure the host servers that you would like to establish connections with. Hence run the below command,
+**Step 8**: If in case config file = None, then follow the below steps to set up the ansible.cfg and hosts. host file is required to configure the host servers that you would like to establish connections with. Run the below command,
 >        (env-autospinup) [<user>@oransicentos8 ~]$ ansible-config view
-**Step 9**: Now Clone this repo to /etc/ansible directory<br />
+**Step 9**: Now Clone the current repo [https://github.com/Arun-Karunakaran/configure_environments.git] to /etc/ansible directory<br />
 **Step 10**: Run the command to check Ansible setup is complete,
 >        [<user>@oransicentos8 ~]$ sudo systemctl status sshd
 **Step 11**: And check whether the sshd connection is Active and in running state and check whether the session is opened with permissions enabled for user root . If permission are not enabled and fails for root user with below error,
