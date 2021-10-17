@@ -8,16 +8,18 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 3. windows server 19
 
 **Usage:**<br />
-1. **Install packages**: python 3.6.8, python3-virtualenv, Create a virtual envrionment and install ansible in the virtual environment (follow **Detailed Instructions** mentioned below to complete the ansible setup in your ansible server controller)
+1. **Install packages**: python 3.6.8, python3-virtualenv, Create a virtual envrionment and install ansible in the virtual environment (*follow Detailed Instructions mentioned below to complete the ansible setup in your ansible server controller*)
 2. clone this repo to your etc/ansible directory
 3. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning and configure environments 
-3. With all the above set you are now ready to GO!! with using ansible playbooks.
-4. *Sample ansible playbook commands*:
-    i) > *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml --syntax-check*  (to perform syntax check)
-   ii) > *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml* (to do a lint check)
-  iii) > *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml -l <speicfyhostnamehere> -vvvv* (to run playbook files)<br />
+4. Having all the above steps set you are now ready to GO!! with using ansible playbooks.<br />
+
+** *Sample ansible playbook commands* ** :<br />
+>    **To perform syntax check:**      *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml --syntax-check*<br />
+>    **To do a lint check:**           *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml*<br />
+>    **To run playbook files**       *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml -l <speicfyhostnamehere> -vvvv*<br />
   
 **Detailed Instructions:**<br />
+
 **Step 1**: Verify that Python3 is installed on Ansible control node
 >       sudo dnf install python3
 >       sudo alternatives --set python /usr/bin/python3
@@ -230,7 +232,9 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       0 File(s) 0 bytes
 >       7 Dir(s) 186,558,099,456 bytes free
 >       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts linuxhost -m command -a "sudo apt-get install vim"
-## Configuring Kerberos & Credssp:
+    
+## Alternative to pywinrm, configure Kerberos & Credssp (optional):
+    
 **Step1**: Alternatively, one can use Kerberos authentication for a strong authentication for client/server applications by using secret-key cryptography. You need these optional dependencies,
 >       [<user>@oransicentos8 bin]$ sudo yum install gcc python3-devel krb5-devel krb5-workstation python3-devel
 **Step2**: Install Kerberos,
