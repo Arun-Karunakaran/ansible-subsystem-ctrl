@@ -8,7 +8,7 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 3. windows server 19
 
 **Usage:**<br />
-1. Install packages: python 3.6.8, python3-virtualenv, Create a virtual envrionment and install ansible in the virtual environment (follow **detailed instructions** mentioned below)
+1. Install packages: python 3.6.8, python3-virtualenv, Create a virtual envrionment and install ansible in the virtual environment (follow **detailed instructions** mentioned below to complete the ansible setup in your controller)
 2. clone this repo to your etc/ansible directory
 3. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning /configure environments 
 3. You are ready to GO!!!
