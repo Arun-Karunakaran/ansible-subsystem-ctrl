@@ -167,25 +167,22 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       "changed": false,
 >       "ping": "pong"
 >       }  
-**Step 18**: Configure Setup for managing Windows hosts using ansible
-**Part1: Configure Control Machine**
+
+## Configure Setup for managing Windows hosts using ansible
+**Step 19**: Configure the ansible Control Machine
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pyOpenSSL --upgrade
-**Install pywinrm with support for basic, certificate, and NTLM auth, simply**
+**Step 20**: Install pywinrm with support for basic, certificate, and NTLM auth, simply
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
-**Part2: Configuring Windows Host**
-For configuring our Windows 10 remote host system to connect with the Ansible Control node. We are going to install the WinRM listener- short for Windows Remote – which will allow the connection between the Windows host system and the Ansible server.
-Before we do so, the Windows host system needs to fulfill a few requirements for the installation to succeed:
->-  Your Windows host system should be Windows 7 or later. For Servers, ensure that you are using Windows Server 2008 and later versions.
->-  Ensure your system is running .NET Framework 4.0 and later.
->-  Windows PowerShell should be Version 3.0 & later
->-  With all the requirements met, now follow the steps stipulated below:
->-  Download the ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator
->          .\ConfigureRemotingForAnsible.ps1
->          Make sure a self signed SSL certificate is generated.
-**Part3:  Check for connection. And perform the below steps**
->-  cd /etc/ansible/
->-  update hosts file,
+**Step 21 Configuring Windows Host**: For configuring our Windows 10 remote host system to connect with the Ansible Control node. We are going to install the WinRM listener- short for Windows Remote – which will allow the connection between the Windows host system and the Ansible server. Before we do so, the Windows host system needs to fulfill a few requirements for the installation to succeed,
+>-       Your Windows host system should be Windows 7 or later. For Servers, ensure that you are using Windows Server 2008 and later versions.
+>-       Ensure your system is running .NET Framework 4.0 and later.
+>-       Windows PowerShell should be Version 3.0 & later
+>-       With all the requirements met, now follow the steps stipulated below:
+>-       Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated.
+**Step 22**:  Checking for successfull connections
+>-       cd /etc/ansible/
+>-       update hosts file,
 >  [winhost] 
 >  <serverip1> 
 >  <serverip2>
