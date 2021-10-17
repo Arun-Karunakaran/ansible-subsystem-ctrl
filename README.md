@@ -13,7 +13,7 @@ This demos the setup of ansible server on a linux RHEL environment which can be 
 3. Update the hosts file /etc/ansible/hosts with the details of remote host machines that you are required to perform software provisioning and configure environments 
 4. Having all the above steps set you are now ready to GO!! with using ansible playbooks.<br />
 
-** *Sample ansible playbook commands* ** :<br />
+*Sample ansible playbook commands* :<br />
 >    **To perform syntax check:**      *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml --syntax-check*<br />
 >    **To do a lint check:**           *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml*<br />
 >    **To run playbook files**       *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/<sampleplaybook1>.yml -l <speicfyhostnamehere> -vvvv*<br />
