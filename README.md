@@ -95,7 +95,7 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >        May 13 03:31:48 oransicentos8 systemd[1]: Started OpenSSH server daemon.
 >        May 13 03:52:48 oransicentos8 sshd[6649]: Accepted password for <user> from 10.5.248.139 port 60719 ssh2
 >        May 13 03:52:48 oransicentos8 sshd[6649]: pam_unix(sshd:session): session opened for user <user> by (uid=0)
-**Step 12**: create ssh-keygen
+**Step 13**: create ssh-keygen
 >       [<user>@oransicentos8 ~]$ ssh-keygen
 >       [<user>@oransicentos8 ansible]$ ssh-keygen
 >       Generating public/private rsa key pair.
@@ -120,15 +120,15 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       | o=O +=+ |
 >       | .+**O===. |
 >       +----[SHA256]-----+
-**Step 13**: Copy the generated SSH key to the remote node,
+**Step 14**: Copy the generated SSH key to the remote node,
 >       [<user>@oransicentos8 ~]$ ssh-copy-id <user@widowshost_ipaddress>
-**Step 14**: Check whether your ping to the local machine is working fine without any issues as below,
+**Step 15**: Check whether your ping to the local machine is working fine without any issues as below,
 >       (env-autospinup) [<user>@oransicentos8 ~]$ ansible localhost -m ping
 >       localhost | SUCCESS => {
 >       "changed": false,
 >       "ping": "pong"
 >       }
-**Step 15**: Recheck on inventory host values specified by the user for remote server configurations,
+**Step 16**: Recheck on inventory host values specified by the user for remote server configurations,
 >       (env-autospinup) [<user>@oransicentos8 ~]$ ansible-inventory --list
 ** This should return the below JSON format if hosts are specified **
 >       {
@@ -169,21 +169,20 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       }  
 
 ## Configure Setup for managing Windows hosts using ansible playbooks
-**Step 19**: Configure the ansible Control Machine
+**Step 18**: Configure the ansible Control Machine
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pyOpenSSL --upgrade
-**Step 20**: Install pywinrm with support for basic, certificate, and NTLM auth, simply
+**Step 19**: Install pywinrm with support for basic, certificate, and NTLM auth, simply
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
-**Step 21 Configuring Windows Host**: For configuring our Windows 10 remote host system to connect with the Ansible Control node. We are going to install the WinRM listener- short for Windows Remote – which will allow the connection between the Windows host system and the Ansible server. Before we do so, the Windows host system needs to fulfill a few requirements for the installation to succeed,
->-       Your Windows host system should be Windows 7 or later. For Servers, ensure that you are using Windows Server 2008 and later versions.
->-       Ensure your system is running .NET Framework 4.0 and later.
->-       Windows PowerShell should be Version 3.0 & later
->-       With all the requirements met, now follow the steps stipulated below:
->-       Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Install-WMF3Hotfix.ps1 and run it on an elevated powershell window. 
->-       Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Upgrade-PowerShell.ps1 and the script on an elevated powershell window.
->-       Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated. 
-**Step 22**: Checking for successfull connections
->-       cd /etc/ansible/
->-       update hosts file,
+**Step 20 Configuring Windows Host**: For configuring our Windows 10 remote host system to connect with the Ansible Control node. We are going to install the WinRM listener- short for Windows Remote – which will allow the connection between the Windows host system and the Ansible server. Before we do so, the Windows host system needs to fulfill a few requirements for the installation to succeed,
+1.  Your Windows host system should be Windows 7 or later. For Servers, ensure that you are using Windows Server 2008 and later versions.
+2.  Ensure your system is running .NET Framework 4.0 and later.
+3.  Windows PowerShell should be Version 3.0 & later
+4.  With all the requirements met, now follow the steps stipulated below:
+5.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Install-WMF3Hotfix.ps1 and run it on an elevated powershell window. 
+6.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Upgrade-PowerShell.ps1 and the script on an elevated powershell window.
+7.  Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated<br /><br />
+**Step 21**: Checking for successfull connections
+>       Navigate to /etc/ansible directory on your ansible server. And update the hosts file, a sample hostfile is already provided as part of this clone, update it as per your requirement.
 >       [winhost] 
 >       <serverip1> 
 >       <serverip2>
@@ -202,89 +201,75 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       "changed": false,
 >       "ping": "pong"
 >       }
-Note*: ‘win_ping’ is used here for windows host connections, if it is unix host machine that we are trying to ping, then we are suppose to use ‘ping’ instead of win_ping.
-
-Based on title specified in the hosts file you can ping both windows hosts and unix hosts continuously,
-$ ansible -i /etc/ansible/hosts linuxhost -m ping
-$ ansible -i /etc/ansible/hosts winhost -m win_ping
-Part4: Try running remote commands
-$ ansible -i /etc/ansible/hosts winhost -m win_command -a "cmd /c dir C:\\"
-(env-autospinup) [<user>@oransicentos8 ~]$ ansible -i /etc/ansible/hosts winhost -m win_command -a "cmd /c dir C:\\"
-<host_ip1> | CHANGED | rc=0 >>
-Volume in drive C has no label.
-Volume Serial Number is 2A92-F6EB
-
-Directory of C:\
-
-05/08/2020 02:08 AM <DIR> cygwin64
-04/30/2020 05:43 AM <DIR> Jenkins
-09/15/2018 12:19 AM <DIR> PerfLogs
-05/08/2020 12:43 PM <DIR> Program Files
-05/08/2020 12:56 PM <DIR> Program Files (x86)
-03/26/2020 01:22 AM <DIR> Users
-05/08/2020 01:04 PM <DIR> Windows
-0 File(s) 0 bytes
-7 Dir(s) 186,558,099,456 bytes free
-$ ansible -i /etc/ansible/hosts linuxhost -m command -a "sudo apt-get install vim"
-Part5: Configuring Kerberos & Credssp
-Alternatively, one can use Kerberos authentication for a strong authentication for client/server applications by using secret-key cryptography. You need these optional dependencies,
-
-$ sudo yum install gcc python3-devel krb5-devel krb5-workstation python3-devel
-Then Install Kerberos,
-
-$ sudo pip3 install "pywinrm[kerberos]"
-(env-autospinup) [<user>@oransicentos8 ~]$ sudo pip3 install "pywinrm[kerberos]"
-WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
-Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
-To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
-Requirement already satisfied: pywinrm[kerberos] in /usr/local/lib/python3.6/site-packages (0.4.1)
-Requirement already satisfied: xmltodict in /usr/local/lib/python3.6/site-packages (from pywinrm[kerberos]) (0.12.0)
-Requirement already satisfied: requests>=2.9.1 in /usr/lib/python3.6/site-packages (from pywinrm[kerberos]) (2.20.0)
-Requirement already satisfied: requests_ntlm>=0.3.0 in /usr/local/lib/python3.6/site-packages (from pywinrm[kerberos]) (1.1.0)
-Requirement already satisfied: six in /usr/lib/python3.6/site-packages (from pywinrm[kerberos]) (1.11.0)
-Collecting pykerberos<2.0.0,>=1.2.1
-Using cached pykerberos-1.2.1.tar.gz (24 kB)
-Requirement already satisfied: chardet<3.1.0,>=3.0.2 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[kerberos]) (3.0.4)
-Requirement already satisfied: idna<2.8,>=2.5 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[kerberos]) (2.5)
-Requirement already satisfied: urllib3<1.25,>=1.21.1 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[kerberos]) (1.24.2)
-Requirement already satisfied: ntlm-auth>=1.0.2 in /usr/local/lib/python3.6/site-packages (from requests_ntlm>=0.3.0->pywinrm[kerberos]) (1.4.0)
-Requirement already satisfied: cryptography>=1.3 in /usr/lib64/python3.6/site-packages (from requests_ntlm>=0.3.0->pywinrm[kerberos]) (2.3)
-Requirement already satisfied: asn1crypto>=0.21.0 in /usr/lib/python3.6/site-packages (from cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[kerberos]) (0.24.0)
-Requirement already satisfied: cffi!=1.11.3,>=1.7 in /usr/lib64/python3.6/site-packages (from cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[kerberos]) (1.11.5)
-Requirement already satisfied: pycparser in /usr/lib/python3.6/site-packages (from cffi!=1.11.3,>=1.7->cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[kerberos]) (2.14)
-Building wheels for collected packages: pykerberos
-Building wheel for pykerberos (setup.py) ... done
-Created wheel for pykerberos: filename=pykerberos-1.2.1-cp36-cp36m-linux_x86_64.whl size=79357 sha256=529d8e61e7e35272591ab822f928c2f8953dfd11ddabed1869e293af071e825f
-Stored in directory: /root/.cache/pip/wheels/8b/04/7b/a655ef6a54543ae28ba60f30ced4a03fd4c77f4bc46b3e965a
-Successfully built pykerberos
-Installing collected packages: pykerberos
-Successfully installed pykerberos-1.2.1
-Install credssp,
-
-$ sudo pip3 install "pywinrm[credssp]"
-(env-autospinup) [<user>@oransicentos8 ~]$ sudo pip3 install "pywinrm[credssp]"
-WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
-Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
-To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
-Requirement already satisfied: pywinrm[credssp] in /usr/local/lib/python3.6/site-packages (0.4.1)
-Requirement already satisfied: xmltodict in /usr/local/lib/python3.6/site-packages (from pywinrm[credssp]) (0.12.0)
-Requirement already satisfied: requests>=2.9.1 in /usr/lib/python3.6/site-packages (from pywinrm[credssp]) (2.20.0)
-Requirement already satisfied: requests_ntlm>=0.3.0 in /usr/local/lib/python3.6/site-packages (from pywinrm[credssp]) (1.1.0)
-Requirement already satisfied: six in /usr/lib/python3.6/site-packages (from pywinrm[credssp]) (1.11.0)
-Collecting requests-credssp>=1.0.0
-Downloading requests_credssp-1.1.1-py2.py3-none-any.whl (20 kB)
-Requirement already satisfied: chardet<3.1.0,>=3.0.2 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[credssp]) (3.0.4)
-Requirement already satisfied: idna<2.8,>=2.5 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[credssp]) (2.5)
-Requirement already satisfied: urllib3<1.25,>=1.21.1 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[credssp]) (1.24.2)
-Requirement already satisfied: ntlm-auth>=1.0.2 in /usr/local/lib/python3.6/site-packages (from requests_ntlm>=0.3.0->pywinrm[credssp]) (1.4.0)
-Requirement already satisfied: cryptography>=1.3 in /usr/lib64/python3.6/site-packages (from requests_ntlm>=0.3.0->pywinrm[credssp]) (2.3)
-Requirement already satisfied: pyOpenSSL>=16.0.0 in /usr/lib/python3.6/site-packages (from requests-credssp>=1.0.0->pywinrm[credssp]) (18.0.0)
-Collecting pyasn1>=0.3.1
-Downloading pyasn1-0.4.8-py2.py3-none-any.whl (77 kB)
-|████████████████████████████████| 77 kB 5.1 MB/s
-Requirement already satisfied: asn1crypto>=0.21.0 in /usr/lib/python3.6/site-packages (from cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[credssp]) (0.24.0)
-Requirement already satisfied: cffi!=1.11.3,>=1.7 in /usr/lib64/python3.6/site-packages (from cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[credssp]) (1.11.5)
-Requirement already satisfied: pycparser in /usr/lib/python3.6/site-packages (from cffi!=1.11.3,>=1.7->cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[credssp]) (2.14)
-Installing collected packages: pyasn1, requests-credssp
-Successfully installed pyasn1-0.4.8 requests-credssp-1.1.1
+**Note**: ‘win_ping’ is used here for windows host connections, if it is unix host machine that we are trying to ping, then we are suppose to use ‘ping’ instead of win_ping.
+**Step 22**: Based on title specified in the hosts file you can ping both windows hosts and unix hosts continuously,
+>       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts linuxhost -m ping
+>       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts winhost -m win_ping
+**Step 23**: Try running remote commands
+>       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts winhost -m win_command -a "cmd /c dir C:\\"
+>       <host_ip1> | CHANGED | rc=0 >>
+>       Volume in drive C has no label.
+>       Volume Serial Number is 2A92-F6EB
+>       Directory of C:\
+>       
+>       05/08/2020 02:08 AM <DIR> cygwin64
+>       04/30/2020 05:43 AM <DIR> Jenkins
+>       09/15/2018 12:19 AM <DIR> PerfLogs
+>       05/08/2020 12:43 PM <DIR> Program Files
+>       05/08/2020 12:56 PM <DIR> Program Files (x86)
+>       03/26/2020 01:22 AM <DIR> Users
+>       05/08/2020 01:04 PM <DIR> Windows
+>       0 File(s) 0 bytes
+>       7 Dir(s) 186,558,099,456 bytes free
+>       (env-autospinup) [<user>@oransicentos8 bin]$ ansible -i /etc/ansible/hosts linuxhost -m command -a "sudo apt-get install vim"
+## Configuring Kerberos & Credssp:
+**Step1**: Alternatively, one can use Kerberos authentication for a strong authentication for client/server applications by using secret-key cryptography. You need these optional dependencies,
+>       [<user>@oransicentos8 bin]$ sudo yum install gcc python3-devel krb5-devel krb5-workstation python3-devel
+**Step2**: Install Kerberos,
+>       (env-autospinup) [<user>@oransicentos8 bin]$ sudo pip3 install "pywinrm[kerberos]"
+>       Requirement already satisfied: pywinrm[kerberos] in /usr/local/lib/python3.6/site-packages (0.4.1)
+>       Requirement already satisfied: xmltodict in /usr/local/lib/python3.6/site-packages (from pywinrm[kerberos]) (0.12.0)
+>       Requirement already satisfied: requests>=2.9.1 in /usr/lib/python3.6/site-packages (from pywinrm[kerberos]) (2.20.0)
+>       Requirement already satisfied: requests_ntlm>=0.3.0 in /usr/local/lib/python3.6/site-packages (from pywinrm[kerberos]) (1.1.0)
+>       Requirement already satisfied: six in /usr/lib/python3.6/site-packages (from pywinrm[kerberos]) (1.11.0)
+>       Collecting pykerberos<2.0.0,>=1.2.1
+>       Using cached pykerberos-1.2.1.tar.gz (24 kB)
+>       Requirement already satisfied: chardet<3.1.0,>=3.0.2 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[kerberos]) (3.0.4)
+>       Requirement already satisfied: idna<2.8,>=2.5 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[kerberos]) (2.5)
+>       Requirement already satisfied: urllib3<1.25,>=1.21.1 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[kerberos]) (1.24.2)
+>       Requirement already satisfied: ntlm-auth>=1.0.2 in /usr/local/lib/python3.6/site-packages (from requests_ntlm>=0.3.0->pywinrm[kerberos]) (1.4.0)
+>       Requirement already satisfied: cryptography>=1.3 in /usr/lib64/python3.6/site-packages (from requests_ntlm>=0.3.0->pywinrm[kerberos]) (2.3)
+>       Requirement already satisfied: asn1crypto>=0.21.0 in /usr/lib/python3.6/site-packages (from cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[kerberos]) (0.24.0)
+>       Requirement already satisfied: cffi!=1.11.3,>=1.7 in /usr/lib64/python3.6/site-packages (from cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[kerberos]) (1.11.5)
+>       Requirement already satisfied: pycparser in /usr/lib/python3.6/site-packages (from cffi!=1.11.3,>=1.7->cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[kerberos]) (2.14)
+>       Building wheels for collected packages: pykerberos
+>       Building wheel for pykerberos (setup.py) ... done
+>       Created wheel for pykerberos: filename=pykerberos-1.2.1-cp36-cp36m-linux_x86_64.whl size=79357 sha256=529d8e61e7e35272591ab822f928c2f8953dfd11ddabed1869e293af071e825f
+>       Stored in directory: /root/.cache/pip/wheels/8b/04/7b/a655ef6a54543ae28ba60f30ced4a03fd4c77f4bc46b3e965a
+>       Successfully built pykerberos
+>       Installing collected packages: pykerberos
+>       Successfully installed pykerberos-1.2.1
+**Step3**: Install credssp,
+>       (env-autospinup) [<user>@oransicentos8 bin]$ sudo pip3 install "pywinrm[credssp]"
+>       Requirement already satisfied: pywinrm[credssp] in /usr/local/lib/python3.6/site-packages (0.4.1)
+>       Requirement already satisfied: xmltodict in /usr/local/lib/python3.6/site-packages (from pywinrm[credssp]) (0.12.0)
+>       Requirement already satisfied: requests>=2.9.1 in /usr/lib/python3.6/site-packages (from pywinrm[credssp]) (2.20.0)
+>       Requirement already satisfied: requests_ntlm>=0.3.0 in /usr/local/lib/python3.6/site-packages (from pywinrm[credssp]) (1.1.0)
+>       Requirement already satisfied: six in /usr/lib/python3.6/site-packages (from pywinrm[credssp]) (1.11.0)
+>       Collecting requests-credssp>=1.0.0
+>       Downloading requests_credssp-1.1.1-py2.py3-none-any.whl (20 kB)
+>       Requirement already satisfied: chardet<3.1.0,>=3.0.2 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[credssp]) (3.0.4)
+>       Requirement already satisfied: idna<2.8,>=2.5 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[credssp]) (2.5)
+>       Requirement already satisfied: urllib3<1.25,>=1.21.1 in /usr/lib/python3.6/site-packages (from requests>=2.9.1->pywinrm[credssp]) (1.24.2)
+>       Requirement already satisfied: ntlm-auth>=1.0.2 in /usr/local/lib/python3.6/site-packages (from requests_ntlm>=0.3.0->pywinrm[credssp]) (1.4.0)
+>       Requirement already satisfied: cryptography>=1.3 in /usr/lib64/python3.6/site-packages (from requests_ntlm>=0.3.0->pywinrm[credssp]) (2.3)
+>       Requirement already satisfied: pyOpenSSL>=16.0.0 in /usr/lib/python3.6/site-packages (from requests-credssp>=1.0.0->pywinrm[credssp]) (18.0.0)
+>       Collecting pyasn1>=0.3.1
+>       Downloading pyasn1-0.4.8-py2.py3-none-any.whl (77 kB)
+>       |████████████████████████████████| 77 kB 5.1 MB/s
+>       Requirement already satisfied: asn1crypto>=0.21.0 in /usr/lib/python3.6/site-packages (from cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[credssp]) (0.24.0)
+>       Requirement already satisfied: cffi!=1.11.3,>=1.7 in /usr/lib64/python3.6/site-packages (from cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[credssp]) (1.11.5)
+>       Requirement already satisfied: pycparser in /usr/lib/python3.6/site-packages (from cffi!=1.11.3,>=1.7->cryptography>=1.3->requests_ntlm>=0.3.0->pywinrm[credssp]) (2.14)
+>       Installing collected packages: pyasn1, requests-credssp
+>       Successfully installed pyasn1-0.4.8 requests-credssp-1.1.1
   
