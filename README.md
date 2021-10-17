@@ -43,9 +43,9 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 **Step 8**: If in case config file = None, then follow the below steps to set up the ansible.cfg and hosts. host file is required to configure the host servers that you would like to establish connections with. Run the below command,
 >        (env-autospinup) [<user>@oransicentos8 ~]$ ansible-config view
 **Step 9**: Now Clone the current repo [https://github.com/Arun-Karunakaran/configure_environments.git] to /etc/ansible directory<br />
-**Step 10**: Run the command to check Ansible setup is complete,
+**Step 10**: Run the command to check whether OpenSSH server daemon has started and server is listening on port successfully,
 >        [<user>@oransicentos8 ~]$ sudo systemctl status sshd
-**Step 11**: And check whether the sshd connection is Active and in running state and check whether the session is opened with permissions enabled for user root . If permission are not enabled and fails for root user with below error,
+**Step 11**: And check whether the sshd connection is Active and in running state and check whether the session is opened with permissions enabled for user root. If permission are not enabled and fails for root user with below error,
 >        May 12 20:15:17 oransicentos8 sshd[31140]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.5.20.99 user=root
 >        May 12 20:15:17 oransicentos8 sshd[31140]: pam_succeed_if(sshd:auth): requirement "uid >= 1000" not met by user "root"
 >        May 12 20:15:19 oransicentos8 sshd[31140]: Failed password for root from 10.5.20.99 port 29101 ssh2
@@ -120,7 +120,7 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       | o=O +=+ |
 >       | .+**O===. |
 >       +----[SHA256]-----+
-**Step 13**: To copy the generated SSH key to the remote node run the below command
+**Step 13**: Copy the generated SSH key to the remote node,
 >       [<user>@oransicentos8 ~]$ ssh-copy-id <user@widowshost_ipaddress>
 **Step 14**: Check whether your ping to the local machine is working fine without any issues as below,
 >       (env-autospinup) [<user>@oransicentos8 ~]$ ansible localhost -m ping
@@ -168,41 +168,40 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       "ping": "pong"
 >       }  
 
-## Configure Setup for managing Windows hosts using ansible
+## Configure Setup for managing Windows hosts using ansible playbooks
 **Step 19**: Configure the ansible Control Machine
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pyOpenSSL --upgrade
 **Step 20**: Install pywinrm with support for basic, certificate, and NTLM auth, simply
->       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
 >       (env-autospinup) [<user>@oransicentos8 bin]$ pip install pywinrm
 **Step 21 Configuring Windows Host**: For configuring our Windows 10 remote host system to connect with the Ansible Control node. We are going to install the WinRM listener- short for Windows Remote – which will allow the connection between the Windows host system and the Ansible server. Before we do so, the Windows host system needs to fulfill a few requirements for the installation to succeed,
 >-       Your Windows host system should be Windows 7 or later. For Servers, ensure that you are using Windows Server 2008 and later versions.
 >-       Ensure your system is running .NET Framework 4.0 and later.
 >-       Windows PowerShell should be Version 3.0 & later
 >-       With all the requirements met, now follow the steps stipulated below:
->-       Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated.
-**Step 22**:  Checking for successfull connections
+>-       Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Install-WMF3Hotfix.ps1 and run it on an elevated powershell window. 
+>-       Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Upgrade-PowerShell.ps1 and the script on an elevated powershell window.
+>-       Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated. 
+**Step 22**: Checking for successfull connections
 >-       cd /etc/ansible/
 >-       update hosts file,
->  [winhost] 
->  <serverip1> 
->  <serverip2>
->  [winhost:vars] 
->  ansible_user=<username> 
->  ansible_password=<password> 
->  ansible_connection=winrm 
->  ansible_winrm_server_cert_validation=ignore
-Run the below command to verify whether you are able to ping to hostservers from ansible,
-
-$ ansible winhost -m win_ping
-(env-autospinup) [akarunak@oransicentos8 ~]$ ansible winhost -m win_ping
-<host_ip1> | SUCCESS => {
-"changed": false,
-"ping": "pong"
-}
-<host_ip2> | SUCCESS => {
-"changed": false,
-"ping": "pong"
-}
+>       [winhost] 
+>       <serverip1> 
+>       <serverip2>
+>       [winhost:vars] 
+>       ansible_user=<username> 
+>       ansible_password=<password> 
+>       ansible_connection=winrm 
+>       ansible_winrm_server_cert_validation=ignore
+>-      Run the below command to verify whether you are able to ping to hostservers from ansible,
+>       (env-autospinup) [<user>@oransicentos8 bin]$ ansible winhost -m win_ping
+>       <host_ip1> | SUCCESS => {
+>       "changed": false,
+>       "ping": "pong"
+>       }
+>       <host_ip2> | SUCCESS => {
+>       "changed": false,
+>       "ping": "pong"
+>       }
 Note*: ‘win_ping’ is used here for windows host connections, if it is unix host machine that we are trying to ping, then we are suppose to use ‘ping’ instead of win_ping.
 
 Based on title specified in the hosts file you can ping both windows hosts and unix hosts continuously,
