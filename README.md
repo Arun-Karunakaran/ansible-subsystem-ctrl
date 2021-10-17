@@ -180,9 +180,9 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 4.  With all the requirements met, now follow the steps stipulated below:
 5.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Install-WMF3Hotfix.ps1 and run it on an elevated powershell window. 
 6.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Upgrade-PowerShell.ps1 and the script on an elevated powershell window.
-7.  Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated<br /><br />
-**Step 21**: Checking for successfull connections
->       Navigate to /etc/ansible directory on your ansible server. And update the hosts file, a sample hostfile is already provided as part of this clone, update it as per your requirement.
+7.  Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated.\
+<br />**Step 21**: Checking for successfull connections<br />
+1. Navigate to /etc/ansible directory on your ansible server. And update the hosts file, a sample hostfile is already provided as part of this clone, update it as per your requirement.
 >       [winhost] 
 >       <serverip1> 
 >       <serverip2>
@@ -191,7 +191,7 @@ This demos the setup of ansible on a linux RHEL environment which can be used fo
 >       ansible_password=<password> 
 >       ansible_connection=winrm 
 >       ansible_winrm_server_cert_validation=ignore
->-      Run the below command to verify whether you are able to ping to hostservers from ansible,
+2.  Run the below command to verify whether you are able to ping to hostservers from ansible,
 >       (env-autospinup) [<user>@oransicentos8 bin]$ ansible winhost -m win_ping
 >       <host_ip1> | SUCCESS => {
 >       "changed": false,
