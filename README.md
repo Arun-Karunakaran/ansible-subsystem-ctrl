@@ -21,7 +21,9 @@ This demos the setup of ansible server on a linux RHEL environment which can be 
 *Sample ansible playbook commands* :<br />
 >    **To perform syntax check:**<br />&emsp;&emsp;&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml --syntax-check*<br />
 >    **To do a lint check:**<br />&emsp;&emsp;&emsp;&emsp; *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml*<br />
->    **To run playbooks**<br />&emsp;&emsp;&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml -l specifyhostnamehere -vvvv*<br /><br />&emsp;&emsp;eg:&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/install-python.yml -l specifyhostnamehere -vvvv*<br /><br />This will install python required version in your remote windows desktop and skips it if already installed. required python version to be installed can be modifed or altered in yaml file /etc/ansible/roles/common/vars/external_vars.yml under windloadpath.python_dpath variable.
+>    **To run playbooks**<br />&emsp;&emsp;&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml -l specifyhostnamehere -vvvv*
+>    &emsp;&emsp;eg:&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/install-python.yml -l specifyhostnamehere -vvvv*
+>    This will install python required version in your remote windows desktop and skips it if already installed. required python version to be installed can be modifed or altered in yaml file /etc/ansible/roles/common/vars/external_vars.yml under windloadpath.python_dpath variable.
   
 **Detailed Instructions:**<br />
 
