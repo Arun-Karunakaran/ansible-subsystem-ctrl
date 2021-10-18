@@ -21,7 +21,7 @@ This demos the setup of ansible server on a linux RHEL environment which can be 
 *Sample ansible playbook commands* :<br />
 >    **To perform syntax check:**<br />&emsp;&emsp;&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml --syntax-check*<br />
 >    **To do a lint check:**<br />&emsp;&emsp;&emsp;&emsp; *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml*<br />
->    **To run playbooks**<br />&emsp;&emsp;&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml -l <speicfyhostnamehere> -vvvv*<br />
+>    **To run playbooks**<br />&emsp;&emsp;&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml -l specifyhostnamehere -vvvv*<br />
   
 **Detailed Instructions:**<br />
 
