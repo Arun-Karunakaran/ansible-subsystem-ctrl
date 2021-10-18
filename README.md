@@ -9,7 +9,7 @@ This demos the setup of ansible server on a linux RHEL environment which can be 
 2. **On windows server 16**
 3. **On windows server 19**<br />
 
-**Note**: *This code is yet to have support for other platforms as well*
+   **Note**: *This code is yet to have support for other platforms as well*
 
 **How to use:**
 1. **_Install packages:_** 
