@@ -20,6 +20,11 @@ This demos the setup of ansible server on a linux RHEL environment which can be 
 5. Having all the above steps set you are now ready to GO!! with using ansible playbooks.<br />
 
   **_Usage:_** <br />
+  
+*Sample ansible commands* :<br />
+>    **To perform connection check based on windows grouphosts:**<br />&emsp;&emsp;&emsp;&emsp; *ansible yourhostsgroupnamehere -m win_ping*
+>    **To perform connection check for all windows hosts:**<br />&emsp;&emsp;&emsp;&emsp; *ansible -i /etc/ansible/hosts -m win_ping all*
+
 *Sample ansible playbook commands* :<br />
 >    **To perform syntax check:**<br />&emsp;&emsp;&emsp;&emsp; *ansible-playbook -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml --syntax-check*<br />
 >    **To do a lint check:**<br />&emsp;&emsp;&emsp;&emsp; *ansible-lint -i /etc/ansible/hosts /etc/ansible/roles/common/tasks/yourplaybookname.yml*<br />
