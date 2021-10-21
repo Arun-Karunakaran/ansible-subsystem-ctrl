@@ -201,7 +201,7 @@ This demos the setup of ansible server on a linux RHEL environment which can be 
 3.  Windows PowerShell should be Version 3.0 & later
 4.  With all the requirements met, now follow the steps stipulated below:
 5.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Install-WMF3Hotfix.ps1 and run it on an elevated powershell window. 
-6.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Upgrade-PowerShell.ps1 and the script on an elevated powershell window.
+6.  Download the https://github.com/jborean93/ansible-windows/blob/master/scripts/Upgrade-PowerShell.ps1 and run the script on an elevated powershell window.
 7.  Download the https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 file to the desktop of the remote windows host VM and run it using powershell 3.0 or greater version as an administrator. Make sure a self signed SSL certificate is generated.<br />
 
 **Step 21**: Checking for successfull connections:<br />
