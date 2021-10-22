@@ -1,0 +1,1 @@
+Modify jenkinsslavenode script for passing user prompt values as parameter and use it to configure jenkins slave node for node machine.
