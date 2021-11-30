@@ -1,6 +1,6 @@
-# Ansible controller setup guide:
+# Ansible subsystem controller setup guide:
 
-This demos the setup of ansible server on a linux RHEL environment which can be used for automating the software provisioning or configure environments with prerequisite setup of softwares on a test/build environments. This sample code demos how to configure the system environment variables, modify the registries, add and modify a windows/unix services and how to install prerequisite softwares conveniently on a remote platform in a quick timespan.<br />
+This demos the setup of ansible subsytem on a linux RHEL environment which can be used for automating the software provisioning or configure environments with prerequisite setup of softwares on a test/build environments. This sample code demos how to configure the system environment variables, modify the registries, add and modify a windows/unix services and how to install prerequisite softwares conveniently on a remote platform in a quick timespan.<br />
 
 
 **Supported on below platforms:**<br />
