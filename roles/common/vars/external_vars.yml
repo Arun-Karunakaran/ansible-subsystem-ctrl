@@ -22,8 +22,3 @@
     git_flnm: "Git-2.33.0.2-64-bit.exe"
   unixenvpath:
     javahome_path: "/usr/bin/test"
-  ingprenv:
-    II_TIMEZONE_NAME: India
-    II_DATE_FORMAT: US
-    II_CHARSET: UTF8
-    II_INSTALLATION: I1
